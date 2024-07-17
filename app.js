@@ -1,10 +1,12 @@
 const data = [10,20,30,40,50];
 
 const svg = d3
-  .select("body")
+  .select("#dvz")
   .append("svg")
   .attr("width", 800)
   .attr("height", 400);
+
+console.log("test")
 
 svg
   .selectAll("rect")
@@ -16,3 +18,9 @@ svg
   .attr("width", 50)
   .attr("height", (d) => d)
   .attr("fill", "red");
+
+
+var changeColor = function(){
+  svg.selectAll("rect")
+    .style("fill", "blue")
+}
