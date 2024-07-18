@@ -8,6 +8,12 @@ const svg = d3
 
 console.log("test")
 
+all_data = d3.csv("https://raw.githubusercontent.com/bleung329/cs416_final_project/main/data/Transistor_count_2.csv").then(function(data) {
+  console.log(data);
+})
+
+console.log(all_data.transistor_count)
+
 svg
   .selectAll("rect")
   .data(data)
