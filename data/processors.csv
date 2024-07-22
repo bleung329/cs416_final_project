@@ -73,7 +73,7 @@ ARM700 (32-bit; 8 KB cache),"578,977",1994,ARM,700,68.51,"8,451"
 "Pentium II Klamath (32-bit, 64-bit SIMD, caches)","7,500,000",1997,Intel,350,195,"39,000"
 "AMD K6 (32-bit, caches)","8,800,000",1997,AMD,350,162,"54,000"
 F21 (21-bit; includes e.g. video),"15,000",1997,Offete Enterprises,?,?,?
-"AVR (8-bit, 40-pin; w/memory)","140,000 (48,000  excl. memory)",1997,Nordic VLSI/Atmel,?,?,?
+"AVR (8-bit, 40-pin; w/memory)","48,000",1997,Nordic VLSI/Atmel,?,?,?
 "Pentium II Deschutes (32-bit, large cache)","7,500,000",1998,Intel,250,113,"66,000"
 Alpha 21264 EV6 (64-bit),"15,200,000",1998,DEC,350,313.96,"48,400"
 "Alpha 21164PC PCA57 (64-bit, 48 kB cache)","5,700,000",1998,Samsung,280,100.5,"56,700"
@@ -205,14 +205,13 @@ HiSilicon Kirin 990 5G,"10,300,000,000",2019,Huawei,7,113.31,"90,900,000"
 "Apple M1 (octa-core 64-bit ARM64 SoC, SIMD, caches)","16,000,000,000",2020,Apple,5,119,"134,500,000"
 HiSilicon Kirin 9000,"15,300,000,000",2020,Huawei,5,114,"134,200,000"
 "AMD Ryzen 7 5800H (64-bit, SIMD, caches, I/O and GPU)","10,700,000,000",2021,AMD,7,180,"59,440,000"
-"AMD Epyc 7763 (Milan) (64-core, 64-bit)",?,2021,AMD,7 & 12 (TSMC),"1,064 (8x81416)",?
 Apple A15,"15,000,000,000",2021,Apple,5,107.68,"139,300,000"
 "Apple M1 Pro (10-core, 64-bit)","33,700,000,000",2021,Apple,5,245 mm2,"137,600,000"
 "Apple M1 Max (10-core, 64-bit)","57,000,000,000",2021,Apple,5,420.2 mm2,"135,600,000"
 Power10 dual-chip module (30 SMT8 cores or 60 SMT4 cores),"36,000,000,000",2021,IBM,7 nm,"1,204 mm2","29,900,000"
 Dimensity 9000 (ARM64 SoC),"15,300,000,000",2021,Mediatek,4 (TSMC N4),?,?
 "Apple M1 Ultra (dual-chip module, 2×10 cores)","114,000,000,000",2022,Apple,5,840.5 mm2,"135,600,000"
-"AMD Epyc 7773X (Milan-X) (multi-chip module, 64 cores, 768 MB L3 cache)","26,000,000,000  Milan",2022,AMD,7 & 12 (TSMC),"1,352 (Milan  8×36)",?
+"AMD Epyc 7773X (Milan-X) (multi-chip module, 64 cores, 768 MB L3 cache)","26,000,000,000",2022,AMD,7 & 12 (TSMC),"1,352 (Milan  8×36)",?
 "IBM Telum dual-chip module (2×8 cores, 2×256 MB cache)","45,000,000,000",2022,IBM,7 nm (Samsung),"1,060 mm2","42,450,000"
 "Apple M2 (deca-core 64-bit ARM64 SoC, SIMD, caches)","20,000,000,000",2022,Apple,5,?,?
 Apple A16 (ARM64 SoC),"16,000,000,000",2022,Apple,4,?,?
