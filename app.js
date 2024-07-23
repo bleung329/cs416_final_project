@@ -1,6 +1,6 @@
 //<<< Helper Function Definitions >>>
 
-function make_scatter(data,company,start_year,end_year,color)
+function make_scatter(data,start_year,end_year)
 {
   var filtered = data.filter(function(d){ return d.year >= start_year && d.year <= end_year})
 
@@ -12,7 +12,25 @@ function make_scatter(data,company,start_year,end_year,color)
   .attr("cx", function(d,i){ return yearScale(d.year)})
   .attr("cy", function(d,i){ return transistorScale(d.transistor_count);})
   .attr("r", 5)
-  .attr("fill", color);
+  .attr("fill", function(d){
+    switch (d.designer) {
+      case "AMD":
+        return "red"
+        break;
+      case "Intel":
+        return "blue"
+        break;
+      case "Apple":
+        return "black"
+        break;
+      case "IBM":
+        return "#ffb6c1"
+        break;
+      default:
+        return "#d3d3d3"
+        break;
+    }
+  });
 
 }
 
@@ -48,20 +66,18 @@ const all_data = d3.csv("https://raw.githubusercontent.com/bleung329/cs416_final
       .call(d3.axisBottom(yearScale).tickFormat(d3.format("d")));
   
     // Y axis
-    transistorScale = d3.scaleLinear()
-      .domain([0, d3.max(data, function(d) { return +d.transistor_count; })])
+    transistorScale = d3.scaleLog()
+      .domain([1, d3.max(data, function(d) { return +d.transistor_count; })])
       .range([ height, 0 ]);
     svg.append("g")
       .call(d3.axisLeft(transistorScale));
 
-    console.log(data);
-    make_scatter(data,"Apple",1970,2024,"purple")
-    make_scatter(data,"Intel",1970,2024,"blue")
+    make_scatter(data,1970,2024)
+    make_scatter(data,1970,2024)
     console.log("DONE?")
   }
 )
 
-console.log(all_data.transistor_count)
 
 var changeColor = function(){
   svg.selectAll("circle")
