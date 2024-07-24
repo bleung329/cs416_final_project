@@ -1,5 +1,24 @@
 //Display moores law line chart check
 
+/*
+<<<1970>>>
+MP944, 4004 - First fully integrated CPU and commercially available processor. 1970
+6502 - 1975
+Z80 - 1976
+8088 - First personal computer - 1979
+<<<1980s>>>
+8051 - micro - 1980
+486/860 - first x86 processor with more than 1 mil - 1989
+960CA - First superscalar
+ARM2 - Yay embedded 32 - 1986 
+<<<1990>>>
+AVR - micro - 1997
+<<<2000>>>
+POWER4 - First commercial multicore - 2001
+<<<2010>>>
+Ivy Bridge - First 3D transistors or FinFETs - 2011
+*/
+
 //Change scale of x axis (Filtering year) check
 //Change scale of y axis (log,linear,points) check?
 
@@ -8,18 +27,21 @@
 
 //<<< Helper Definitions >>>
 
+const chip_descs = {POWER4:"Blah blah blah"}
+
 function init_scatter(data)
 {
   scatter = svg
   .append('g')
   .attr("clip-path","url(#clip)")
-  .selectAll("circle")
+  .selectAll("rect")
   .data(data)
   .enter()
-  .append("circle")
-  .attr("cx", function(d,i){ return yearScale(d.year)})
-  .attr("cy", function(d,i){ return transistorScale(d.transistor_count);})
-  .attr("r", 4)
+  .append("rect")
+  .attr("x", function(d,i){ return yearScale(d.year)})
+  .attr("y", function(d,i){ return transistorScale(d.transistor_count);})
+  .attr("height",6)
+  .attr("width",6)
   .attr("fill", function(d){
     switch (d.designer) {
       case "AMD":
@@ -34,6 +56,12 @@ function init_scatter(data)
         return "#d3d3d3"
     }
   })
+  //Check lookup table for if the device has a description. If so, set as a rectangle, else, set as circle.
+  .attr("rx", 
+    function(d){
+      if (d.name in chip_descs){ return 0;}
+      else{ return 6;}})
+  .attr("ry", 6)
 }
 
 //Calculate out moores law values
