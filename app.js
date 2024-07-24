@@ -1,22 +1,15 @@
-//Display moores law line chart
+//Display moores law line chart check
 
-//Change scale of x axis (Filtering year)
-//Change scale of y axis (log,linear,points)
+//Change scale of x axis (Filtering year) check
+//Change scale of y axis (log,linear,points) check?
 
 //Filter out points (Select company)
 //Mouseover to view annotation
 
-//<<< Helper Function Definitions >>>
+//<<< Helper Definitions >>>
 
 function init_scatter(data)
 {
-  // create a clipping region
-  svg.append("defs").append("clipPath")
-  .attr("id", "clip")
-  .append("rect")
-  .attr("width", width+5)
-  .attr("height", height+5);
-
   scatter = svg
   .append('g')
   .attr("clip-path","url(#clip)")
@@ -43,6 +36,32 @@ function init_scatter(data)
   })
 }
 
+//Calculate out moores law values
+var mooresPred = new Array();
+var moores_transistor_count = 2250; //Start with the transistor count of the Intel 4004
+for (let year = 1970; year < 2024; year+=2) {
+  mooresPred.push([year,moores_transistor_count]);
+  moores_transistor_count *= 2;
+}
+
+function init_moores_plot()
+{
+    mooresPlot = svg
+    .append('g')
+    .attr("clip-path","url(#clip)")
+    .append('path')
+    .attr("class","line")
+    .datum(mooresPred)
+    .attr("fill", "none")
+    .attr("stroke", "green")
+    .attr("stroke-width", 1.5)
+    .style("stroke-dasharray",("10,10"))
+    .attr("d", d3.line()
+      .x(function(d) { return yearScale(d[0]) })
+      .y(function(d) { return transistorScale(d[1]) })
+      )
+}
+
 //<<< Main >>>
 
 var margin = {top: 10, right: 30, bottom: 30, left: 100},
@@ -58,12 +77,12 @@ const svg = d3
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")")
 
-var yearScale,yearAxis,transistorScale,transistorAxis,scatter = null;
+
+var yearScale,yearAxis,transistorScale,transistorAxis,scatter,mooresPlot = null;
 
 const all_data = d3.csv("https://raw.githubusercontent.com/bleung329/cs416_final_project/main/data/processors.csv")
 .then(
   function(data) {
-
     // X axis
     yearScale = d3.scaleLinear()
                 .domain(d3.extent(data, 
@@ -100,34 +119,43 @@ const all_data = d3.csv("https://raw.githubusercontent.com/bleung329/cs416_final
     .attr("y", height - 6)
     .text("YEAR");
 
-    init_scatter(data)
+    // create a clipping region
+    svg.append("defs").append("clipPath")
+    .attr("id", "clip")
+    .append("rect")
+    .attr("width", width+5)
+    .attr("height", height+5);
+
+    //Initialize actual plots
+    init_scatter(data);
+    init_moores_plot();
     
     var zoom =  d3.zoom()
     .scaleExtent([1, 5])
     .translateExtent([[0, 0], [width, height]])
     .extent([[0, 0], [width, height]])
-    .on("zoom", updateChart);
+    .on("zoom", zoomChart);
     
     svg.append("rect")
     .attr("width", width)
     .attr("height", height)
     .style("fill", "none")
     .style("pointer-events", "all")
-    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
     .call(zoom).call(zoom.transform, d3.zoomIdentity);
     
-    function updateChart({transform}) {
+    function zoomChart({transform}) {
     
-      // recover the new scale
+      //Recover scale
       var newYearScale = transform.rescaleX(yearScale).interpolate(d3.interpolateRound);
       var newTransistorScale = transform.rescaleY(transistorScale).interpolate(d3.interpolateRound);
     
-      // update axes with these new boundaries
+      //Update axes 
       yearAxis.call(d3.axisBottom(newYearScale).tickFormat(d3.format("d")))
       transistorAxis.call(d3.axisLeft(newTransistorScale))
     
-      // update circle positions
+      //Update plot positions and scales
       scatter.attr("transform",transform)
+      mooresPlot.attr("transform",transform)
     }
 
     console.log("DONE?")

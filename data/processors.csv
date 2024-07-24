@@ -86,6 +86,7 @@ Alpha 21264 EV6 (64-bit),15200000,1998,DEC,350,313.96,"48,400"
 "Gekko (32-bit, large cache)",21000000,2000,IBM/Nintendo,180,43,"490,000 (check)"
 "Pentium III Coppermine (32-bit, large cache)",21000000,2000,Intel,180,80,"263,000"
 "Pentium 4 Willamette (32-bit, large cache)",42000000,2000,Intel,180,217,"194,000"
+"POWER4",174000000,2001,IBM,180,?,?
 "SPARC64 V (64-bit, large cache)",191000000,2001,Fujitsu,130,290,"659,000"
 "Pentium III Tualatin (32-bit, large cache)",45000000,2001,Intel,130,81,"556,000"
 "Pentium 4 Northwood (32-bit, large cache)",55000000,2002,Intel,130,145,"379,000"
