@@ -22,12 +22,10 @@ Ivy Bridge - First 3D transistors or FinFETs - 2011
 //Change scale of x axis (Filtering year) check
 //Change scale of y axis (log,linear,points) check?
 
-//Filter out points (Select company)
+//Filter out points (Select company) check
 //Mouseover to view annotation
 
 //<<< Helper Definitions >>>
-
-const chip_descs = {POWER4:"Blah blah blah"}
 
 function init_scatter(data)
 {
@@ -59,14 +57,27 @@ function init_scatter(data)
   //Check lookup table for if the device has a description. If so, set as a rectangle, else, set as circle.
   .attr("rx", 
     function(d){
-      if (d.name in chip_descs){ return 0;}
-      else{ return 6;}})
+      if (d.name in CHIP_DESCS){ 
+        return 0;
+      }
+      else{
+        return 6;
+      }
+    })
   .attr("ry", 6)
+  .on("mouseover",function(event,d){
+    //Add annotation
+    showAnnotation(d)
+  })
+  .on("mouseout",function(event,d){
+    //Replace annotation with default Moores law text
+    console.log("done")
+  })
 }
 
 //Calculate out moores law values
 var mooresPred = new Array();
-var moores_transistor_count = 2250; //Start with the transistor count of the Intel 4004
+var moores_transistor_count = 2250; //NOTE: Starts with the transistor count of the Intel 4004
 for (let year = 1970; year < 2024; year+=2) {
   mooresPred.push([year,moores_transistor_count]);
   moores_transistor_count *= 2;
@@ -147,7 +158,7 @@ const all_data = d3.csv("https://raw.githubusercontent.com/bleung329/cs416_final
     .attr("y", height - 6)
     .text("YEAR");
 
-    // create a clipping region
+    //Clipping region
     svg.append("defs").append("clipPath")
     .attr("id", "clip")
     .append("rect")
@@ -164,12 +175,14 @@ const all_data = d3.csv("https://raw.githubusercontent.com/bleung329/cs416_final
     .extent([[0, 0], [width, height]])
     .on("zoom", zoomChart);
     
+    //An invisible rectangle for catching zoom events
     svg.append("rect")
     .attr("width", width)
     .attr("height", height)
     .style("fill", "none")
     .style("pointer-events", "all")
-    .call(zoom).call(zoom.transform, d3.zoomIdentity);
+    .call(zoom).call(zoom.transform, d3.zoomIdentity)
+    .lower() 
     
     function zoomChart({transform}) {
     
@@ -190,8 +203,23 @@ const all_data = d3.csv("https://raw.githubusercontent.com/bleung329/cs416_final
   }
 )
 
-var changeColor = function(){
-  svg.selectAll("circle")
-    .style("fill", "blue")
+function showHideCompany(elem){
+  var temp = scatter.filter(function(d){return d.designer.toLowerCase() == elem.id;})
+  if (elem.checked) {
+    //Make nodes visible again.
+    temp
+    .attr("visibility","visible")
+    .attr("pointer-events", "all");
+  }
+  else{
+    //Hide node and disable mouseover events
+    temp
+    .attr("visibility","hidden")
+    .attr("pointer-events", "none");
+  }
 }
 
+function showAnnotation(data)
+{
+  console.log(data.name) 
+}

@@ -1,0 +1,13 @@
+#company_filter{
+    border: red 1px solid;
+    position: relative;
+    left: 1200px;
+    top: 100px;
+}
+
+#annotation{
+    border: green 1px solid;
+    position: relative;
+    left: 1200px;
+    top: 120px;
+}

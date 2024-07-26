@@ -4,10 +4,35 @@
         <meta charset="utf-8" />
         <title>Testing</title>
         <script src="https://d3js.org/d3.v6.min.js"></script>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <button type="button" onclick="changeColor()">Blue</button>
-        <div id="dviz"></div>
+        <div id="dviz">
+            <table id="company_filter">
+                <tr>
+                    <td>
+                        <label><input id="amd" type="checkbox" onclick="showHideCompany(this)" checked>AMD</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><input id="intel" type="checkbox" onclick="showHideCompany(this)" checked>Intel</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><input id="apple" type="checkbox" onclick="showHideCompany(this)" checked>Apple</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><input id="ibm" type="checkbox" onclick="showHideCompany(this)" checked>IBM</label>
+                    </td>
+                </tr>
+            </table>
+            <div id="annotation">HELLO</div>
+        </div>
+        <script src="chip_annotations.js"></script>
         <script src="app.js"></script>
     </body>
 </html>
