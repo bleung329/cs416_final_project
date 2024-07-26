@@ -8,7 +8,7 @@ Z80 - 1976
 8088 - First personal computer - 1979
 <<<1980s>>>
 8051 - micro - 1980
-486/860 - first x86 processor with more than 1 mil - 1989
+486/860 - first x86 processor with more than 1 mil and cache - 1989
 960CA - First superscalar
 ARM2 - Yay embedded 32 - 1986 
 <<<1990>>>
