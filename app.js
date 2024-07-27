@@ -20,15 +20,17 @@ function init_scatter(data)
   .attr("x", function(d,i){ return yearScale(d.year)})
   .attr("y", function(d,i){ return transistorScale(d.transistor_count);})
   .attr("fill", function(d){
-    switch (d.designer) {
-      case "AMD":
+    switch (d.designer.toLowerCase()) {
+      case "amd":
         return "red"
-      case "Intel":
+      case "intel":
         return "blue"
-      case "Apple":
+      case "apple":
         return "black"
-      case "IBM":
+      case "ibm":
         return "#ffb6c1"
+      case "arm":
+        return "#0091BD"
       default:
         return "#d3d3d3"
     }
@@ -212,6 +214,6 @@ function showAnnotation(data)
   if (data.name in CHIP_DESCS){ 
     aboutString = "<br></br>"+CHIP_DESCS[data.name]
   }
-  chipInfoHtml += "About:"+aboutString
+  chipInfoHtml += "Notes:"+aboutString
   document.getElementById('annotation').innerHTML = chipInfoHtml;
 }
