@@ -1,13 +1,25 @@
-#company_filter{
+#companyFilter{
     border: red 1px solid;
     position: relative;
     left: 1200px;
     top: 100px;
+    font-family: Arial, Helvetica, sans-serif
 }
-
+    
 #annotation{
     border: green 1px solid;
-    position: relative;
-    left: 1200px;
-    top: 120px;
+    position: absolute;
+    left: 1210px;
+    top: 250px;
+    width:300px;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+/*Misc affordances*/
+#zoomRect{
+    cursor: zoom-in;
+}
+
+#scatterPoint{
+    cursor: help;
 }

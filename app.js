@@ -1,24 +1,5 @@
 //Display moores law line chart check
 
-/*
-<<<1970>>>
-MP944, 4004 - First fully integrated CPU and commercially available processor. 1970
-6502 - 1975
-Z80 - 1976
-8088 - First personal computer - 1979
-<<<1980s>>>
-8051 - micro - 1980
-486/860 - first x86 processor with more than 1 mil and cache - 1989
-960CA - First superscalar
-ARM2 - Yay embedded 32 - 1986 
-<<<1990>>>
-AVR - micro - 1997
-<<<2000>>>
-POWER4 - First commercial multicore - 2001
-<<<2010>>>
-Ivy Bridge - First 3D transistors or FinFETs - 2011
-*/
-
 //Change scale of x axis (Filtering year) check
 //Change scale of y axis (log,linear,points) check?
 
@@ -38,8 +19,6 @@ function init_scatter(data)
   .append("rect")
   .attr("x", function(d,i){ return yearScale(d.year)})
   .attr("y", function(d,i){ return transistorScale(d.transistor_count);})
-  .attr("height",6)
-  .attr("width",6)
   .attr("fill", function(d){
     switch (d.designer) {
       case "AMD":
@@ -54,33 +33,37 @@ function init_scatter(data)
         return "#d3d3d3"
     }
   })
+  .attr("height",function(d){
+    if (d.name in CHIP_DESCS){return 8;}else{return 6;}
+  })
+  .attr("width",function(d){
+    if (d.name in CHIP_DESCS){return 8;}else{return 6;}
+  })
   //Check lookup table for if the device has a description. If so, set as a rectangle, else, set as circle.
   .attr("rx", 
     function(d){
-      if (d.name in CHIP_DESCS){ 
-        return 0;
-      }
-      else{
-        return 6;
-      }
+      if (d.name in CHIP_DESCS){return 0;}else{return 6;}
     })
   .attr("ry", 6)
   .on("mouseover",function(event,d){
     //Add annotation
+    d3.select(this).attr("opacity",0.75)
     showAnnotation(d)
   })
   .on("mouseout",function(event,d){
     //Replace annotation with default Moores law text
-    console.log("done")
+    d3.select(this).attr("opacity",1)
+    document.getElementById('annotation').innerHTML = DEFAULT_TEXT;
   })
+  .attr("id","scatterPoint")
 }
 
 //Calculate out moores law values
 var mooresPred = new Array();
-var moores_transistor_count = 2250; //NOTE: Starts with the transistor count of the Intel 4004
+var mooresTransistorCount = 2250; //NOTE: Starts with the transistor count of the Intel 4004
 for (let year = 1970; year < 2024; year+=2) {
-  mooresPred.push([year,moores_transistor_count]);
-  moores_transistor_count *= 2;
+  mooresPred.push([year,mooresTransistorCount]);
+  mooresTransistorCount *= 2;
 }
 
 function init_moores_plot()
@@ -139,7 +122,7 @@ const all_data = d3.csv("https://raw.githubusercontent.com/bleung329/cs416_final
     .attr("y", 6)
     .attr("dy", ".75em")
     .attr("transform", "rotate(-90)")
-    .text("TRANSISTOR COUNT");
+    .text("Transistor Count (Log)");
   
     // Y axis
     transistorScale = d3.scaleLog()
@@ -156,7 +139,7 @@ const all_data = d3.csv("https://raw.githubusercontent.com/bleung329/cs416_final
     .attr("text-anchor", "end")
     .attr("x", width)
     .attr("y", height - 6)
-    .text("YEAR");
+    .text("Year");
 
     //Clipping region
     svg.append("defs").append("clipPath")
@@ -168,6 +151,7 @@ const all_data = d3.csv("https://raw.githubusercontent.com/bleung329/cs416_final
     //Initialize actual plots
     init_scatter(data);
     init_moores_plot();
+    document.getElementById('annotation').innerHTML = DEFAULT_TEXT;
     
     var zoom =  d3.zoom()
     .scaleExtent([1, 5])
@@ -183,6 +167,7 @@ const all_data = d3.csv("https://raw.githubusercontent.com/bleung329/cs416_final
     .style("pointer-events", "all")
     .call(zoom).call(zoom.transform, d3.zoomIdentity)
     .lower() 
+    .attr("id","zoomRect")
     
     function zoomChart({transform}) {
     
@@ -198,8 +183,6 @@ const all_data = d3.csv("https://raw.githubusercontent.com/bleung329/cs416_final
       scatter.attr("transform",transform)
       mooresPlot.attr("transform",transform)
     }
-
-    console.log("DONE?")
   }
 )
 
@@ -221,5 +204,14 @@ function showHideCompany(elem){
 
 function showAnnotation(data)
 {
-  console.log(data.name) 
+  var chipInfoHtml = "Name: "+data.name+"<br></br>"
+  chipInfoHtml += "Designer: "+data.designer+"<br></br>"
+  chipInfoHtml += "Process: "+data.process_nm+" nm<br></br>"
+  chipInfoHtml += "Transistor Count: "+data.transistor_count.toString().replace(/,/g,"").replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"<br></br>"
+  var aboutString = " ---"
+  if (data.name in CHIP_DESCS){ 
+    aboutString = "<br></br>"+CHIP_DESCS[data.name]
+  }
+  chipInfoHtml += "About:"+aboutString
+  document.getElementById('annotation').innerHTML = chipInfoHtml;
 }
