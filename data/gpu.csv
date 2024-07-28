@@ -1,5 +1,5 @@
-Processor,Transistor count,Year,Designer(s),Fab(s),Process,Area,"Transistor density, tr./mm2",Ref
-µPD7220 GDC,"40,000",1982,NEC,NEC,"5,000",?,?,
+processor,transistor_count,year,designer,fab,process,area,transistor_density_tr_per_mm2,
+uPD7220 GDC,"40,000",1982,NEC,NEC,"5,000",?,?,
 ARTC HD63484,"60,000",1984,Hitachi,Hitachi,?,?,?,
 CBM Agnus,"21,000",1985,Commodore,CSG,"5,000",?,?,
 YM7101 VDP,"100,000",1988,"Yamaha, Sega",Yamaha,?,?,?,
@@ -159,4 +159,3 @@ AD102 Ada Lovelace,"76,300,000,000",2022,Nvidia,TSMC,4,608.4,"125,411,000",
 AD103 Ada Lovelace,"45,900,000,000",2022,Nvidia,TSMC,4,378.6,"121,240,000",
 AD104 Ada Lovelace,"35,800,000,000",2022,Nvidia,TSMC,4,294.5,"121,560,000",
 Navi 31 RDNA3,"58,000,000,000",2022,AMD,TSMC,5(GCD) 6(MCD),531(MCM) 306(GCD) 6 37.5(MCD),"109,200,000(MCM) 132,400,000(GCD)",
-Processor,Transistor count,Year,Designer(s),Fab(s),MOS process,Area,"Transistor density, tr./mm2",Ref

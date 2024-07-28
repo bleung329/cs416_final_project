@@ -1,28 +1,13 @@
 
-const DEFAULT_TEXT = "Moores Law, named after former Intel CEO Gordon Moore, is the prediction that the number of \
-transistors on a new microprocessor doubles every two years. This predicted trend is indicated by the dotted line. \
-While just an observation, the fact that it has roughly held for over 40 years has codified it as law.<br></br> Mouseover and zoom on the\
- graph to find out more about each chip and the evolution of consumer computing."
-
-/*
-<<<1970>>>
-MP944, 4004 - First fully integrated CPU and commercially available processor. 1970
-6502 - 1975
-Z80 - 1976
-8088 - First personal computer - 1979
-<<<1980s>>>
-8051 - micro - 1980
-486/860 - first x86 processor with more than 1 mil and cache - 1989
-960CA - First superscalar
-ARM2 - Yay embedded 32 - 1986 
-<<<1990>>>
-AVR - micro - 1997
-<<<2000>>>
-POWER4 - First commercial multicore - 2001
-<<<2010>>>
-Ivy Bridge - First 3D transistors or FinFETs - 2011
-*/
-
+const SCENE_TEXT = [
+    "Moores Law is the prediction that the number of \
+transistors on a new microprocessor doubles every two years. <br></br>The former Intel CEO, Gordon Moore, made this prediction in 1965, based on his extensive experience in the semiconductor industry.",
+    "I've overlayed onto the plot what Moores Law is describing. I've started this line from the Intel 4004, the first commercially available microprocessor.",
+    "Adding the CPUs in our dataset until 2020, we can already see that it follows pretty closely.<br></br>Let's see what an actual best fit line says about this data...",
+    "Taking a best fit of the actual data, we see that the actual rate every 2 years is about 1.953. Considering this prediction was made in 1965 and held\
+     closely for over 50 years, it's fair to say that Moore's Law can truly be codified as \"law\".<br></br> Mouseover and zoom on the\
+      plot to find out more about each chip and the evolution of consumer computing."
+];
 
 const CHIP_DESCS = 
 {
@@ -50,5 +35,7 @@ const CHIP_DESCS =
     Corporation to improve computer literacy & coding abilities in the UK.",
     AMD_Epyc:"AMD's attempt to re-enter the server computing market, it powers the Frontier supercomputer, which remains the most powerful supercomputer to date.",
     Pentium_4_Cedar_Mill: "The latest entry in Intel's Pentium 4 line, which gained an unfortunate reputation for high power consumption and heat.",
-    Core_2_Duo_Conroe:"Among the first Intel processors based on the new Core microarchitecture, which resolved non-negligible heat issues in the previous Pentium 4 & Netburst architectures."
+    Core_2_Duo_Conroe:"Among the first Intel processors based on the new Core microarchitecture, which resolved non-negligible heat issues in the previous Pentium 4 & Netburst architectures.",
+    "Freedom_U500_Base_Platform_Chip_RISC-V":"First released in 2011, RISC-V is an open ISA (vs. the licensed x86/ARM/etc.), growing in popularity in both the commercial and hobbyist spaces. The U500 \
+    is just one example of a growing RISC-V system-on-chip market."
 }

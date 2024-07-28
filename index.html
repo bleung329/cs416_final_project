@@ -2,8 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Testing</title>
+        <title>Moores Law</title>
         <script src="https://d3js.org/d3.v6.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/2.5.1/d3-annotation.min.js"></script>
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
@@ -36,6 +37,10 @@
                 </tr>
             </table>
             <div id="annotation"></div>
+            <div id="sceneControl">
+                <input id="prevButton" type="button" onclick="changeScene(false)" value="PREV">
+                <input id="nextButton" type="button" onclick="changeScene(true)" value="NEXT">
+            </div>
         </div>
         <script src="chip_annotations.js"></script>
         <script src="app.js"></script>
